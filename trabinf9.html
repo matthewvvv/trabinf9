@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Compras</title>
+  <link rel="stylesheet" type="text/css" href="trabinf9.css" media="screen" />
+
+</head>
+<body>
+
+  <h1>Calculadora de Compras</h1>
+
+  <label for="codigo">Código do Produto:</label>
+  <input type="number" id="codigo" placeholder="Informe o código">
+
+  <label for="quantidade">Quantidade:</label>
+  <input type="number" id="quantidade" placeholder="Informe a quantidade">
+
+  <button onclick="calcularTotal()">Calcular Total</button>
+
+  <p id="resultado"></p>
+    
+
+  <div id="precos">
+  <p id="Arroz"> Arroz R$ 8,00 kg</p>
+  <p id="Feijão"> Feijão R$ 5,00 kg</p>
+  <p id="frango"> Carne de frango R$ 15,00 kg</p>
+  </div>
+
+
+  <script>
+    // Definindo a lista de produtos com códigos e preços
+    const produtos = [
+      { codigo: 1, nome: 'Arroz', preco: 8.0 },
+      { codigo: 2, nome: 'Feijao', preco: 5.0 },
+      { codigo: 3, nome: 'Carne de frango', preco: 15.0 },
+    ];
+
+    function calcularTotal() {
+      // Obtendo os valores inseridos pelo usuário / parseInt é usado para transformar a String em um número inteiro
+      const codigoProduto = parseInt(document.getElementById('codigo').value);
+      const quantidade = parseInt(document.getElementById('quantidade').value);
+
+      // Procurando o produto na lista com base no código
+      const produtoSelecionado = produtos.find(produto => produto.codigo === codigoProduto);
+
+    // Calculando o valor total usando um switch interno para cada produto
+    let total = 0;
+      switch (codigoProduto) {
+        case 1:
+          total = calcularTotalProdutoA(quantidade, produtoSelecionado.preco);
+          break;
+        case 2:
+          total = calcularTotalProdutoB(quantidade, produtoSelecionado.preco);
+          break;
+        case 3:
+          total = calcularTotalProdutoC(quantidade, produtoSelecionado.preco);
+          break;
+        default:
+          document.getElementById('resultado').innerText = 'Código de produto inválido';
+          return;
+      }
+
+      document.getElementById('resultado').innerText = `Total a pagar por ${quantidade} ${produtoSelecionado.nome}(s): R$ ${total.toFixed(2)}`;
+  
+  
+    }
+    // Funções auxiliares para calcular o total de cada produto 3 funções diferentes para serem puxadas acima ^^^
+    function calcularTotalProdutoA(quantidade, preco) {
+      // Lógica específica para o Produto A
+      return quantidade * preco;
+    }
+
+    function calcularTotalProdutoB(quantidade, preco) {
+      // Lógica específica para o Produto B
+      return quantidade * preco;
+    }
+
+    function calcularTotalProdutoC(quantidade, preco) {
+      // Lógica específica para o Produto C
+      return quantidade * preco;
+    }
+  </script>
+  
+
+</body>
+</html>
